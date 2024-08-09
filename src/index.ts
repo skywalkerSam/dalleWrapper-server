@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+const PORT: number | string = process.env.PORT || 8080;
+
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -90,8 +92,8 @@ app.post("/generate", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`\n\nServer running on http://localhost:${process.env.PORT}/\n`);
+app.listen(PORT, () => {
+  console.log(`\n\nServer running on http://localhost:${PORT}/\n`);
 });
 
 // .env
