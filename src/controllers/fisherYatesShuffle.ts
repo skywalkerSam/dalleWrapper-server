@@ -62,36 +62,40 @@ const imageStore: string[] = [
 ].sort();
 
 let randomImageStore: string[] = [];
-const min: number = 0;
-let max: number = imageStore.length;
-let randomIndex: number = 0;
 
-let called: boolean = true;
-function fisherYatesShuffle(min, max) {
-  if (called) {
-    for (max >= min; max--; ) {
-      randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
-      randomImageStore.push(imageStore[randomIndex]);
-      imageStore.splice(randomIndex, 1);
-      // console.log(min, max, randomIndex);
-      // console.log(imageStore, randomImageStore);
-    }
-    called = false;
+// let fisherCalled: boolean = true;
+export function fisherYatesShuffle() {
+  const min: number = 0;
+  let max: number = imageStore.length;
+  let randomIndex: number = 0;
+  for (max >= min; max--; ) {
+    randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+    randomImageStore.push(imageStore[randomIndex]);
+    imageStore.splice(randomIndex, 1);
+    // console.log(min, max, randomIndex);
+    // console.log(imageStore, randomImageStore);
   }
+
   return randomImageStore;
 }
 
-let i: number = 0;
-export function randomImageUrl() {
-  fisherYatesShuffle(min, max);
-  i++;
-  console.log(i, randomImageStore.length, imageStore.length);
-  console.log("\n", randomImageStore[i], "\n");
-  return randomImageStore[i];
-}
+// let i: number = randomImageStore.length - 1;
+// export function randomImageUrl() {
+//   fisherYatesShuffle();
+//   i--;
+//   console.log(i, randomImageStore.length, imageStore.length);
+//   console.log("\n", randomImageStore[i], "\n");
+//   return randomImageStore[i];
+// }
 
 // console.log(imageStore)
 // console.log(randomImageStore);
-randomImageUrl();
+// randomImageUrl();
 // console.log(randomImageStore)
 // console.log(imageStore);
+
+// console.log(fisherYatesShuffle());
+
+/** Bugs:
+ * Not sending randomize array on each request!
+ */
