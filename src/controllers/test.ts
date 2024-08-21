@@ -15,8 +15,8 @@ export const getImageUrl = (req, res) => {
 
     console.log("\n...Incoming Request: ", prompt);
 
-    // mimic API response: add delay
-    sleep(3000, function () {
+    // mimic API response: add delay ;)
+    sleep(1000, function () {
       console.log("\n", imageUrl);
       res.send({ imageUrl });
     });

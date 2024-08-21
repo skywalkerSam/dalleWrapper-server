@@ -61,22 +61,37 @@ const imageStore: string[] = [
   "https://cdnb.artstation.com/p/assets/images/images/078/380/933/large/zdenek-sladky-nataliefrontbeutyfull3.jpg?1721929571",
 ].sort();
 
-export function randomImageUrl() {
-  let randomImageStore: string[] = [];
-  let randomIndex: number = 0;
-  let max: number = imageStore.length;
-  const min: number = 0;
-  for (max >= min; max--; ) {
-    randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
-    randomImageStore.push(imageStore[randomIndex]);
-    // imageStore.splice(randomIndex, 1)
-    // console.log(min, max, randomIndex);
-    // console.log(imageStore, randomImageStore);
+let randomImageStore: string[] = [];
+const min: number = 0;
+let max: number = imageStore.length;
+let randomIndex: number = 0;
+
+let called: boolean = true;
+function fisherYatesShuffle(min, max) {
+  if (called) {
+    for (max >= min; max--; ) {
+      randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+      randomImageStore.push(imageStore[randomIndex]);
+      imageStore.splice(randomIndex, 1);
+      // console.log(min, max, randomIndex);
+      // console.log(imageStore, randomImageStore);
+    }
+    called = false;
   }
-  // console.log(min, max, randomIndex)
-  // console.log(imageStore, randomImageStore);
-  console.log("\n", randomImageStore[randomIndex], "\n");
-  return randomImageStore[randomIndex];
+  return randomImageStore;
 }
 
-// randomImageUrl();
+let i: number = 0;
+export function randomImageUrl() {
+  fisherYatesShuffle(min, max);
+  i++;
+  console.log(i, randomImageStore.length, imageStore.length);
+  console.log("\n", randomImageStore[i], "\n");
+  return randomImageStore[i];
+}
+
+// console.log(imageStore)
+// console.log(randomImageStore);
+randomImageUrl();
+// console.log(randomImageStore)
+// console.log(imageStore);
